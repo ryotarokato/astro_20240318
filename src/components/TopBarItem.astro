@@ -1,0 +1,11 @@
+---
+const {title, url, target, key } = Astro.props;
+---
+
+<li class=`border-l-[1px] border-gray-900  ${key === 3 ? 'bg-cyan-100' : ''} ${key ===2 ? 'bg-green-100' : ''}`>
+	<a href={url} target={target} class="h-full">
+		<sapn class=`text-base font-light text-gray-900 cursor-pointer px-4`>
+			{title}
+		</sapn>
+	</a>
+</li>

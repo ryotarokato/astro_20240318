@@ -1,0 +1,51 @@
+We need a frontend developer skilled in creating a responsive .astro component with Tailwind CSS. Your task is to develop a single component, accepting props, with the option to test using hardcoded values.
+
+Requirements:
+
+- Must create an Astro.build component.
+- Use TypeScript for prop typing.
+- Tailwind CSS is the only styling framework allowed.
+- Only vanilla JS allowed.
+- The component should be responsive across devices (tablet, mobile, etc.).
+- Do not alter the provided Tailwind CSS configuration, except for width and height values.
+
+Key Informations :
+
+Visit the starting repository on stackblitz. Fork it and develop directly in stackblitz. You give us your stackblitz in return for the review of the job post.
+Design is in the figma file.
+
+- Logo can be download as .svg and rendered with an img tag
+- Header component takes 3 components :
+- primaryMenu, of type Menu
+- secondaryMenu, of type Menu
+- cta of type :
+title: string
+url: string,
+target: '_blank' | '_self'
+
+Menu is of type : MenuItem[] where MenuItem is of type :
+title: string
+url: string
+target: '_blank' | '_self'
+
+- Colors in the topbar "cyan & green" must be rendered based on the order of the elements (first have cyan bg, second green bg, the others, no bg).
+- You must handle mobile burger menu
+
+Links :
+- Figma file: https://www.figma.com/file/OJJMPiE6OSqqZ9OZ59RC1k/Plastiform-Component-7?type=design&node-id=0%3A1&mode=design&t=9aTdwpY7rQ60nDdG-1
+- Starting repository: https://stackblitz.com/edit/plastiform
+
+Application Process:
+
+For first-time applicants, submit:
+
+- 2-3 examples of your work with Astro, Tailwind CSS, or pure HTML.
+- Your budget.
+- Your timeline.
+- Put "874-447" at the top of your application.
+
+Applications not following these three criteria will be disregarded. Preference is given to developers who can deliver the requested work fast and with high quality code that doesn't require long to review.
+
+We want a component that can be copy pasted & are ready to use.
+
+There is many others straightforward jobs like this one for freelancers that best fit our expectations.

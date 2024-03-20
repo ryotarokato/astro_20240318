@@ -1,0 +1,80 @@
+---
+import NavItem from '../components/NavItem.astro';
+import Cta from '../components/Cta.astro';
+import TopBarItem from '../components/TopBarItem.astro';
+import { Image } from 'astro:assets';
+import logo from './i/_logo.svg';
+export type Menu = {
+    title : string
+    url : string
+    target: '_blank' | '_self'
+}
+const primaryMenuList: Menu[] = [
+    { title: 'APPLICATIONS', url: '/', target: '_self' },
+    { title: 'PRODUCTS', url: '/', target: '_self' },
+    { title: 'RESOURCES', url: '/', target: '_self' },
+    { title: 'COMPANY', url: '/', target: '_self' },
+    { title: 'CONTACT', url: '/', target: '_self' },
+];
+const secondaryMenuList: Menu[] = [
+    { title: 'HELP CENTER', url: '/', target: '_self' },
+    { title: 'MSDS', url: '/', target: '_self' },
+    { title: 'BECOME A DISTRIBUTOR', url: '/', target: '_self' },
+    { title: 'GET MY CASE', url: '/', target: '_self' },
+];
+---
+
+<div class="bg-white lg:w-[1728px] m-auto mt-10">
+    <div class="px-16">
+        <ul role="list" class="flex justify-end items-center border-r-[1px] border-black">
+            {
+                secondaryMenuList.map((menuItem, index)=>(
+                    <TopBarItem title = {menuItem.title} url = {menuItem.url} target = {menuItem.target} key = {index}/>
+                ))
+            }
+        </ul>
+    </div>
+    <button
+    class="flex flex-col h-12 w-12 border-2 border-cyan-400 rounded justify-center items-center group gap-2 md:hidden">
+        <div
+            class={`w-9 h-1 bg-cyan-400 rounded-sm ${
+            true
+                ? 'rotate-45 translate-y-3 opacity-50 group-hover:opacity-100'
+                : 'opacity-50 group-hover:opacity-100'
+            }`}
+        ></div>
+        <div
+            class={`w-9 h-1 bg-cyan-400 rounded-sm ${
+            true
+                ? 'opacity-0'
+                : 'opacity-50 group-hover:opacity-100'
+            }`}
+        ></div>
+        <div
+            class={`w-9 h-1 bg-cyan-400 rounded-sm ${
+            true
+                ? '-rotate-45 -translate-y-3 opacity-50 group-hover:opacity-100'
+                : 'opacity-50 group-hover:opacity-100'
+            }`}
+        ></div>
+    </button>
+    <div class="flex justify-between items-center px-16 py-6 border-t-[1px] border-black flex-col md:flex-row">
+        <div>
+            <a href="/">
+                <Image src={logo} alt="logo"/>
+            </a>
+        </div>
+        <div>
+            <ul role="list" class="flex gap-5">
+                {
+                    primaryMenuList.map((menuItem, index)=>(
+                        <NavItem title = {menuItem.title} url = {menuItem.url} target = {menuItem.target}/>
+                    ))
+                }
+            </ul>
+        </div>
+        <div>
+            <Cta title ='FIND MY PLASTIFORM' url='#' target='_self'/>
+        </div>
+    </div>
+</div>
