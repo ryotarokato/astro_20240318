@@ -1,84 +1,124 @@
 ---
-import NavItem from '../components/NavItem.astro';
-import Cta from '../components/Cta.astro';
-import TopBarItem from '../components/TopBarItem.astro';
-import { Image } from 'astro:assets';
-import logo from './i/_logo.svg';
+import NavItem from "../components/NavItem.astro";
+import Cta from "../components/Cta.astro";
+import TopBarItem from "../components/TopBarItem.astro";
+import { Image } from "astro:assets";
+import logo from "./i/_logo.svg";
 export type Menu = {
-    title : string
-    url : string
-    target: '_blank' | '_self'
-}
+  title: string;
+  url: string;
+  target: "_blank" | "_self";
+};
 const primaryMenuList: Menu[] = [
-    { title: 'APPLICATIONS', url: '/', target: '_self' },
-    { title: 'PRODUCTS', url: '/', target: '_self' },
-    { title: 'RESOURCES', url: '/', target: '_self' },
-    { title: 'COMPANY', url: '/', target: '_self' },
-    { title: 'CONTACT', url: '/', target: '_self' },
+  { title: "APPLICATIONS", url: "/", target: "_self" },
+  { title: "PRODUCTS", url: "/", target: "_self" },
+  { title: "RESOURCES", url: "/", target: "_self" },
+  { title: "COMPANY", url: "/", target: "_self" },
+  { title: "CONTACT", url: "/", target: "_self" },
 ];
 const secondaryMenuList: Menu[] = [
-    { title: 'HELP CENTER', url: '/', target: '_self' },
-    { title: 'MSDS', url: '/', target: '_self' },
-    { title: 'BECOME A DISTRIBUTOR', url: '/', target: '_self' },
-    { title: 'GET MY CASE', url: '/', target: '_self' },
+  { title: "HELP CENTER", url: "/", target: "_self" },
+  { title: "MSDS", url: "/", target: "_self" },
+  { title: "BECOME A DISTRIBUTOR", url: "/", target: "_self" },
+  { title: "GET MY CASE", url: "/", target: "_self" },
 ];
 ---
 
-<div class="relative bg-white min-h-24 w-11/12 xl:w-full m-auto mt-10 xl:mt-0 xl:rounded-none rounded-md ease-in-out duration-300 shadow-lg">
-    <div class="px-16">
-        <ul role="list" class="hidden xl:flex justify-end items-center border-r-[1px] border-black">
-            {
-                secondaryMenuList.map((menuItem, index)=>(
-                    <TopBarItem title = {menuItem.title} url = {menuItem.url} target = {menuItem.target} key = {index}/>
-                ))
-            }
+<div
+  class="relative bg-white min-h-24 w-11/12 xl:w-full m-auto mt-10 xl:mt-0 xl:rounded-none rounded-md ease-in-out shadow-lg duration-200"
+>
+  <div class="px-16">
+    <ul
+      role="list"
+      class="hidden xl:flex justify-end items-center border-r-[1px] border-black"
+    >
+      {
+        secondaryMenuList.map((menuItem, index) => (
+          <TopBarItem
+            title={menuItem.title}
+            url={menuItem.url}
+            target={menuItem.target}
+            key={index}
+          />
+        ))
+      }
+    </ul>
+  </div>
+  <div
+    class="flex justify-between xl:justify-end items-center px-16 py-6 border-t-[1px] border-black flex-col xl:flex-row"
+  >
+    <div class="absolute left-8 xl:left-16">
+      <a href="/">
+        <Image src={logo} alt="logo" />
+      </a>
+    </div>
+    <div
+      id="drop-menu"
+      class="sm:hidden w-full flex flex-col xl:flex xl:flex-row justify-between items-center pt-12 xl:pt-0 gap-12"
+    >
+      <div class="w-96 h-10"></div>
+      <div>
+        <ul
+          role="list"
+          class="flex gap-12 xl:gap-5 flex-col xl:flex-row items-center"
+        >
+          {
+            primaryMenuList.map((menuItem, index) => (
+              <NavItem
+                title={menuItem.title}
+                url={menuItem.url}
+                target={menuItem.target}
+              />
+            ))
+          }
         </ul>
+      </div>
+      <div>
+        <Cta title="FIND MY PLASTIFORM" url="#" target="_self" />
+      </div>
     </div>
-    <div class="flex justify-between xl:justify-end items-center px-16 py-6 border-t-[1px] border-black flex-col xl:flex-row">
-        <div class="absolute left-8 xl:left-16">
-            <a href="/">
-                <Image src={logo} alt="logo"/>
-            </a>
-        </div>
-        <div class="lg:hidden w-full flex flex-col xl:flex xl:flex-row justify-between items-center pt-12 xl:pt-0 gap-12">
-            <div class="w-96 h-10">
-            </div>
-            <div>
-                <ul role="list" class="flex gap-12 xl:gap-5 flex-col xl:flex-row items-center">
-                    {
-                        primaryMenuList.map((menuItem, index)=>(
-                            <NavItem title = {menuItem.title} url = {menuItem.url} target = {menuItem.target}/>
-                        ))
-                    }
-                </ul>
-            </div>
-            <div>
-                <Cta title ='FIND MY PLASTIFORM' url='#' target='_self'/>
-            </div>
-        </div>
-        <button
-        class="absolute right-8 flex flex-col h-12 w-12 border-2 border-cyan-400 rounded justify-center items-center group gap-2 xl:hidden">
-            <div
-                class={`w-9 h-1 bg-cyan-400 rounded-sm ${
-                true
-                    ? 'rotate-45 translate-y-3 opacity-50 group-hover:opacity-100'
-                    : 'opacity-50 group-hover:opacity-100'
-                }`}
-            ></div>
-            <div
-                class={`w-9 h-1 bg-cyan-400 rounded-sm ${
-                true
-                    ? 'opacity-0'
-                    : 'opacity-50 group-hover:opacity-100'
-                }`}
-            ></div>
-            <div
-                class={`w-9 h-1 bg-cyan-400 rounded-sm ${
-                true
-                    ? '-rotate-45 -translate-y-3 opacity-50 group-hover:opacity-100'
-                    : 'opacity-50 group-hover:opacity-100'
-                }`}
-            ></div>
-        </button>
-    </div>
+    <button
+      class="absolute right-8 flex flex-col h-12 w-12 border-2 border-cyan-400 rounded justify-center items-center group gap-2 xl:hidden"
+      id="sm-btn"
+    >
+      <div
+        class={`btn-bar w-9 h-1 bg-cyan-400 rounded-sm opacity-50 group-hover:opacity-100 ease-in duration-200`}
+      >
+      </div>
+      <div
+        class={`btn-bar w-9 h-1 bg-cyan-400 rounded-sm opacity-50 group-hover:opacity-100 ease-in duration-100`}
+      >
+      </div>
+      <div
+        class={`btn-bar w-9 h-1 bg-cyan-400 rounded-sm opacity-50 group-hover:opacity-100 ease-in duration-200`}
+      >
+      </div>
+    </button>
+  </div>
 </div>
+
+<script>
+  var smBtn = document.getElementById("sm-btn");
+  var dropMenu = document.getElementById("drop-menu");
+  var btnBars = document.getElementsByClassName("btn-bar");
+
+  if (smBtn !== null) {
+    smBtn.addEventListener("click", function () {
+      if (this.classList.contains("opened")) {
+        btnBars[0].classList.remove("rotate-45", "translate-y-3");
+        btnBars[1].classList.remove("opacity-0");
+        btnBars[1].classList.add("opacity-50", "group-hover:opacity-100");
+        btnBars[2].classList.remove("-rotate-45", "-translate-y-3");
+        dropMenu?.classList.add("sm:hidden");
+        this.classList.remove("opened");
+      } else {
+        btnBars[0].classList.add("rotate-45", "translate-y-3");
+        btnBars[1].classList.add("opacity-0");
+        btnBars[1].classList.remove("opacity-50", "group-hover:opacity-100");
+        btnBars[2].classList.add("-rotate-45", "-translate-y-3");
+        dropMenu?.classList.remove("sm:hidden");
+        this.classList.add("opened");
+      }
+    });
+  }
+</script>

@@ -1,11 +1,13 @@
 ---
-const {title, url, target } = Astro.props;
+const { title, url, target } = Astro.props;
 ---
 
 <li>
-	<a href={url} target={target}>
-		<sapn class="text-xl xl:text-base font-bold text-gray-900 cursor-pointer hover:text-cyan-400 transition-colors duration-200">
-			{title}
-		</sapn>
-	</a>
+  <a href={url} target={target}>
+    <sapn
+      class="text-xl xl:text-base font-bold text-gray-900 cursor-pointer hover:text-cyan-400 transition-colors duration-200"
+    >
+      {title}
+    </sapn>
+  </a>
 </li>
