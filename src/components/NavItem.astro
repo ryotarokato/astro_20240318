@@ -2,12 +2,14 @@
 const { title, url, target } = Astro.props;
 ---
 
-<li>
-  <a href={url} target={target}>
-    <sapn
-      class="text-xl xl:text-base font-bold text-gray-900 cursor-pointer hover:text-cyan-400 transition-colors duration-200"
-    >
-      {title}
-    </sapn>
-  </a>
+<li class="w-full text-left">
+  <div class="w-full">
+    <a href={url} target={target}>
+      <div
+        class="text-base py-2 px-3 border-[1px] xl:border-0 border-black rounded-md xl:bg-white bg-gray-50 font-bold text-gray-900 cursor-pointer hover:text-cyan-400 transition-colors duration-200 w-full"
+      >
+        {title}
+      </div>
+    </a>
+  </div>
 </li>

@@ -3,13 +3,13 @@ const { title, url, target, key } = Astro.props;
 ---
 
 <li
-  class=`border-l-[1px] border-gray-900 h-full ${key === 3 ? 'bg-cyan-100' : ''} ${key ===2 ? 'bg-green-100' : ''}`
+  class=`list-none rounded-md xl:rounded-none border-[1px] xl:border-0 xl:border-l-[1px] border-gray-900 h-full ${key === 3 ? 'bg-cyan-100' : ''} ${key ===2 ? 'bg-green-100' : ''}`
 >
   <a href={url} target={target} class="h-full">
-    <sapn
-      class=`text-base font-light text-gray-900 cursor-pointer lg:px-4 px-2`
+    <div
+      class=`text-base font-light text-gray-900 cursor-pointer xl:px-2 px-3 py-2 xl:py-0`
     >
       {title}
-    </sapn>
+    </div>
   </a>
 </li>

@@ -4,6 +4,8 @@ import Cta from "../components/Cta.astro";
 import TopBarItem from "../components/TopBarItem.astro";
 import { Image } from "astro:assets";
 import logo from "./i/_logo.svg";
+import sm_logo from "./i/_logo-sm.svg";
+
 export type Menu = {
   title: string;
   url: string;
@@ -27,10 +29,10 @@ const secondaryMenuList: Menu[] = [
 <div
   class="relative bg-white min-h-24 w-11/12 xl:w-full m-auto mt-10 xl:mt-0 xl:rounded-none rounded-md ease-in-out shadow-lg duration-200"
 >
-  <div class="px-16">
+  <div class="hidden xl:flex justify-end px-16">
     <ul
       role="list"
-      class="hidden xl:flex justify-end items-center border-r-[1px] border-black"
+      class="xl:flex justify-end items-center border-r-[1px] border-black"
     >
       {
         secondaryMenuList.map((menuItem, index) => (
@@ -45,22 +47,23 @@ const secondaryMenuList: Menu[] = [
     </ul>
   </div>
   <div
-    class="flex justify-between xl:justify-end items-center px-16 py-6 border-t-[1px] border-black flex-col xl:flex-row"
+    class="flex justify-between xl:justify-end items-center xl:px-16 py-6 border-t-[1px] border-black flex-col xl:flex-row"
   >
     <div class="absolute left-8 xl:left-16">
       <a href="/">
-        <Image src={logo} alt="logo" />
+        <Image src={logo} alt="logo" class="hidden xl:flex" />
+        <Image src={sm_logo} alt="logo" class="flex xl:hidden" />
       </a>
     </div>
     <div
       id="drop-menu"
       class="sm:hidden w-full flex flex-col xl:flex xl:flex-row justify-between items-center pt-12 xl:pt-0 gap-12"
     >
-      <div class="w-96 h-10"></div>
-      <div>
+      <div class="w-full xl:w-96 h-2 xl:h-10 border-b-[1px] xl:border-0"></div>
+      <div class="w-full xl:w-auto">
         <ul
           role="list"
-          class="flex gap-12 xl:gap-5 flex-col xl:flex-row items-center"
+          class="flex gap-6 xl:gap-5 flex-col xl:flex-row items-center px-7"
         >
           {
             primaryMenuList.map((menuItem, index) => (
@@ -73,7 +76,22 @@ const secondaryMenuList: Menu[] = [
           }
         </ul>
       </div>
-      <div>
+      <div class="flex flex-col xl:hidden w-full px-7 gap-6 justify-between">
+        <hr />
+        {
+          secondaryMenuList
+            .map((menuItem, index) => (
+              <TopBarItem
+                title={menuItem.title}
+                url={menuItem.url}
+                target={menuItem.target}
+                key={index}
+              />
+            ))
+            .reverse()
+        }
+      </div>
+      <div class="xl:flex w-full xl:w-auto px-7 xl:p-0 pt-8 xl:py-0">
         <Cta title="FIND MY PLASTIFORM" url="#" target="_self" />
       </div>
     </div>
