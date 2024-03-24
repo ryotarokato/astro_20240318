@@ -5,20 +5,34 @@ import TopBarItem from "../components/TopBarItem.astro";
 import { Image } from "astro:assets";
 import logo from "./i/_logo.svg";
 import sm_logo from "./i/_logo-sm.svg";
-
-export type Menu = {
+export type ISubMenu = {
   title: string;
   url: string;
   target: "_blank" | "_self";
 };
-const primaryMenuList: Menu[] = [
-  { title: "APPLICATIONS", url: "/", target: "_self" },
+export type IMenu = {
+  title: string;
+  url: string;
+  target: "_blank" | "_self";
+  subMenu?: ISubMenu[];
+};
+const primaryMenuList: IMenu[] = [
+  {
+    title: "APPLICATIONS",
+    url: "/",
+    target: "_self",
+    subMenu: [
+      { title: "Dimensional Control", url: "/", target: "_self" },
+      { title: "Roughness Control", url: "/", target: "_self" },
+      { title: "Protection & Masking", url: "/", target: "_self" },
+    ],
+  },
   { title: "PRODUCTS", url: "/", target: "_self" },
   { title: "RESOURCES", url: "/", target: "_self" },
   { title: "COMPANY", url: "/", target: "_self" },
   { title: "CONTACT", url: "/", target: "_self" },
 ];
-const secondaryMenuList: Menu[] = [
+const secondaryMenuList: IMenu[] = [
   { title: "HELP CENTER", url: "/", target: "_self" },
   { title: "MSDS", url: "/", target: "_self" },
   { title: "BECOME A DISTRIBUTOR", url: "/", target: "_self" },
@@ -71,6 +85,7 @@ const secondaryMenuList: Menu[] = [
                 title={menuItem.title}
                 url={menuItem.url}
                 target={menuItem.target}
+                subMenu={menuItem.subMenu}
               />
             ))
           }

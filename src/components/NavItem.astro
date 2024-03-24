@@ -1,15 +1,64 @@
 ---
-const { title, url, target } = Astro.props;
+const { title, url, target, subMenu } = Astro.props;
 ---
 
-<li class="w-full text-left">
-  <div class="w-full">
-    <a href={url} target={target}>
-      <div
-        class="text-base py-2 px-3 border-[1px] xl:border-0 border-black rounded-md xl:bg-white bg-gray-50 font-bold text-gray-900 cursor-pointer hover:text-cyan-400 transition-colors duration-200 w-full"
-      >
-        {title}
+{
+  subMenu ? (
+    <>
+      <li class="sub-item w-full text-left xl:hidden">
+        <div class="w-full">
+          <div class="flex justify-between items-center text-base py-2 px-3 border-[1px] xl:border-0 border-black rounded-md xl:bg-white bg-gray-50 font-bold text-gray-900 cursor-pointer hover:text-cyan-400 transition-colors duration-200 w-full">
+            <div>{title}</div>
+            <div class="toggle-icon ease-in duration-100">&#708;</div>
+          </div>
+          <div class="sub-item-menu hidden">
+            {subMenu.map(
+              (
+                menuItem: { title: string; url: string; target: string },
+                index: number
+              ) => (
+                <div class="text-base px-7 py-1 hover:text-cyan-500 transition-colors duration-200">
+                  <a href={menuItem.url} target={menuItem.target}>
+                    {menuItem.title}
+                  </a>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      </li>
+      <li class="w-full text-left hidden xl:flex">
+        <div class="w-full">
+          <a href={url} target={target}>
+            <div class="text-base py-2 px-3 border-[1px] xl:border-0 border-black rounded-md xl:bg-white bg-gray-50 font-bold text-gray-900 cursor-pointer hover:text-cyan-400 transition-colors duration-200 w-full">
+              {title}
+            </div>
+          </a>
+        </div>
+      </li>
+    </>
+  ) : (
+    <li class="w-full text-left">
+      <div class="w-full">
+        <a href={url} target={target}>
+          <div class="text-base py-2 px-3 border-[1px] xl:border-0 border-black rounded-md xl:bg-white bg-gray-50 font-bold text-gray-900 cursor-pointer hover:text-cyan-400 transition-colors duration-200 w-full">
+            {title}
+          </div>
+        </a>
       </div>
-    </a>
-  </div>
-</li>
+    </li>
+  )
+}
+
+<script>
+  var subItem = document.getElementsByClassName("sub-item");
+  var subItemMenu = document.getElementsByClassName("sub-item-menu");
+  var toggleIcons = document.getElementsByClassName("toggle-icon");
+
+  for (let i = 0; i < subItem.length; i++) {
+    subItem[i].addEventListener("click", function () {
+      subItemMenu[i].classList.toggle("hidden");
+      toggleIcons[i].classList.toggle("-rotate-180");
+    });
+  }
+</script>
