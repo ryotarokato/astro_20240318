@@ -4,19 +4,35 @@ import Cta from "../components/Cta.astro";
 import TopBarItem from "../components/TopBarItem.astro";
 import { Image } from "astro:assets";
 import logo from "./i/_logo.svg";
-export type Menu = {
+import sm_logo from "./i/_logo-sm.svg";
+export type ISubMenu = {
   title: string;
   url: string;
   target: "_blank" | "_self";
 };
-const primaryMenuList: Menu[] = [
-  { title: "APPLICATIONS", url: "/", target: "_self" },
+export type IMenu = {
+  title: string;
+  url: string;
+  target: "_blank" | "_self";
+  subMenu?: ISubMenu[];
+};
+const primaryMenuList: IMenu[] = [
+  {
+    title: "APPLICATIONS",
+    url: "/",
+    target: "_self",
+    subMenu: [
+      { title: "Dimensional Control", url: "/", target: "_self" },
+      { title: "Roughness Control", url: "/", target: "_self" },
+      { title: "Protection & Masking", url: "/", target: "_self" },
+    ],
+  },
   { title: "PRODUCTS", url: "/", target: "_self" },
   { title: "RESOURCES", url: "/", target: "_self" },
   { title: "COMPANY", url: "/", target: "_self" },
   { title: "CONTACT", url: "/", target: "_self" },
 ];
-const secondaryMenuList: Menu[] = [
+const secondaryMenuList: IMenu[] = [
   { title: "HELP CENTER", url: "/", target: "_self" },
   { title: "MSDS", url: "/", target: "_self" },
   { title: "BECOME A DISTRIBUTOR", url: "/", target: "_self" },
@@ -27,10 +43,10 @@ const secondaryMenuList: Menu[] = [
 <div
   class="relative bg-white min-h-24 w-11/12 xl:w-full m-auto mt-10 xl:mt-0 xl:rounded-none rounded-md ease-in-out shadow-lg duration-200"
 >
-  <div class="px-16">
+  <div class="hidden xl:flex justify-end px-16">
     <ul
       role="list"
-      class="hidden xl:flex justify-end items-center border-r-[1px] border-black"
+      class="xl:flex justify-end items-center border-r-[1px] border-black"
     >
       {
         secondaryMenuList.map((menuItem, index) => (
@@ -45,22 +61,23 @@ const secondaryMenuList: Menu[] = [
     </ul>
   </div>
   <div
-    class="flex justify-between xl:justify-end items-center px-16 py-6 border-t-[1px] border-black flex-col xl:flex-row"
+    class="flex justify-between xl:justify-end items-center xl:px-16 py-6 border-t-[1px] border-black flex-col xl:flex-row"
   >
     <div class="absolute left-8 xl:left-16">
       <a href="/">
-        <Image src={logo} alt="logo" />
+        <Image src={logo} alt="logo" class="hidden xl:flex" />
+        <Image src={sm_logo} alt="logo" class="flex xl:hidden" />
       </a>
     </div>
     <div
       id="drop-menu"
       class="sm:hidden w-full flex flex-col xl:flex xl:flex-row justify-between items-center pt-12 xl:pt-0 gap-12"
     >
-      <div class="w-96 h-10"></div>
-      <div>
+      <div class="w-full xl:w-96 h-2 xl:h-10 border-b-[1px] xl:border-0"></div>
+      <div class="w-full xl:w-auto">
         <ul
           role="list"
-          class="flex gap-12 xl:gap-5 flex-col xl:flex-row items-center"
+          class="flex gap-6 xl:gap-5 flex-col xl:flex-row items-center px-7"
         >
           {
             primaryMenuList.map((menuItem, index) => (
@@ -68,17 +85,33 @@ const secondaryMenuList: Menu[] = [
                 title={menuItem.title}
                 url={menuItem.url}
                 target={menuItem.target}
+                subMenu={menuItem.subMenu}
               />
             ))
           }
         </ul>
       </div>
-      <div>
+      <div class="flex flex-col xl:hidden w-full px-7 gap-6 justify-between">
+        <hr />
+        {
+          secondaryMenuList
+            .map((menuItem, index) => (
+              <TopBarItem
+                title={menuItem.title}
+                url={menuItem.url}
+                target={menuItem.target}
+                key={index}
+              />
+            ))
+            .reverse()
+        }
+      </div>
+      <div class="xl:flex w-full xl:w-auto px-7 xl:p-0 pt-8 xl:py-0">
         <Cta title="FIND MY PLASTIFORM" url="#" target="_self" />
       </div>
     </div>
     <button
-      class="absolute right-8 flex flex-col h-12 w-12 border-2 border-cyan-400 rounded justify-center items-center group gap-2 xl:hidden"
+      class="absolute right-8 flex flex-col h-12 w-12rounded justify-center items-center group gap-2 xl:hidden"
       id="sm-btn"
     >
       <div
